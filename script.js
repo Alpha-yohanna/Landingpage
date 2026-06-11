@@ -1,31 +1,44 @@
-// CONFIGURATION: Paste your actual WhatsApp Group Link here!
 const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/KLTSicbD5XWG2GX3xnQo6W";
 
-document
-  .getElementById("cryptoLeadForm")
-  .addEventListener("submit", function (event) {
-    // 1. Prevent the page from just reloading
-    event.preventDefault();
+const form = document.getElementById("cryptoLeadForm");
 
-    // 2. Grab the information the user typed in
-    const userName = document.getElementById("name").value;
-    const userWhatsapp = document.getElementById("whatsapp").value;
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-    // 3. Create a clean readable log of the lead data
-    const leadData = `Name: ${userName} | WhatsApp: ${userWhatsapp} | Joined: ${new Date().toLocaleString()}\n`;
+  const userName = document.getElementById("name").value.trim();
+  const userWhatsapp = document.getElementById("whatsapp").value.trim();
 
-    // 4. Save data directly in the browser by generating a downloadable local backup
-    // (This ensures you don't lose the data even without setting up a live database server yet!)
-    const blob = new Blob([leadData], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `crypto_lead_${userName.replace(/\s+/g, "_")}.txt`;
+  if (!userName || !userWhatsapp) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-    // Programmatically trigger a silent file download backup
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const leadData = `
+Name: ${userName}
+WhatsApp: ${userWhatsapp}
+Joined: ${new Date().toLocaleString()}
+------------------------------------
+`;
 
-    // 5. Instantly redirect the user right into your WhatsApp group
-    window.location.href = WHATSAPP_GROUP_LINK;
+  const blob = new Blob([leadData], {
+    type: "text/plain",
   });
+
+  const link = document.createElement("a");
+
+  link.href = URL.createObjectURL(blob);
+
+  link.download = `crypto_lead_${userName.replace(/\s+/g, "_")}.txt`;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  const btn = document.querySelector(".submit-btn");
+
+  btn.innerHTML = "✅ Redirecting...";
+
+  setTimeout(() => {
+    window.location.href = WHATSAPP_GROUP_LINK;
+  }, 1000);
+});

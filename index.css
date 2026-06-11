@@ -316,3 +316,102 @@ body {
   color: #475569;
   font-size: 0.75rem;
 }
+
+/* Better Mobile Layout */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .proof-container {
+    gap: 1rem;
+  }
+
+  .proof-stat {
+    font-size: 1.5rem;
+  }
+}
+
+/* Smooth Animations */
+.form-card,
+.submit-btn,
+.form-group input {
+  transition: all 0.3s ease;
+}
+
+/* Better Input Styling */
+.form-group input {
+  height: 56px;
+  font-size: 16px;
+}
+
+.form-group input:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+}
+
+/* Better Button */
+.submit-btn {
+  min-height: 56px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Card Hover Effect */
+.form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(245, 158, 11, 0.12);
+}
+
+/* Smooth Page Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better Container Width */
+.hero-section,
+.header-container,
+.proof-container {
+  width: 100%;
+}
+
+/* iPhone Safe Area Support */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.trust-badges span {
+  background: #111827;
+  padding: 8px 12px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
